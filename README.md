@@ -15,6 +15,11 @@ mkdir models/Personalized_Model
 # Wan
 # https://huggingface.co/alibaba-pai/Wan2.1-Fun-V1.1-14B-InP
 # https://modelscope.cn/models/PAI/Wan2.1-Fun-V1.1-14B-InP
+
+# configure conda environment
+conda create -n wanxtraj python=3.10
+conda activate wanxtraj
+pip install -r requirements.txt
 ```
 ## Model Training
 <h4 id="data-preprocess">a. data preprocessing</h4>

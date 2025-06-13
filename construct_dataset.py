@@ -46,7 +46,7 @@ def main():
     dataset = construct_dataset(base_dir)
     
     # 将结果写入JSON文件
-    output_file = os.path.join(base_dir, 'dataset.json')
+    output_file = os.path.join(base_dir, 'metadata.json')
     with open(output_file, 'w') as f:
         json.dump(dataset, f, indent=2)
     
