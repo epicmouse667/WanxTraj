@@ -1,4 +1,68 @@
-# VideoX-Fun
+😊 Welcome!
+# How to Use
+## Model Training
+<h4 id="data-preprocess">a. data preprocessing</h4>
+
+You need to arrange the dataset in this format
+```
+.
+├── prompt.txt
+├── tracking
+│   ├── 1_tracking.mp4
+│   ├── 2_tracking.mp4
+│   ├── 3_tracking.mp4
+│   ├── 4_tracking.mp4
+│   └── 5_tracking.mp4
+├── trackings.txt
+├── videos
+│   ├── 1.mp4
+│   ├── 2.mp4
+│   ├── 3.mp4
+│   ├── 4.mp4
+│   ├── 5.mp4
+│   ├── fall.mp4
+│   └── walk.mp4
+```
+The json_of_internal_datasets.json is a standard JSON file. The file_path in the json can to be set as relative path, as shown in below:
+```json
+[
+    {
+      "file_path": "train/00000001.mp4",
+      "text": "A group of young men in suits and sunglasses are walking down a city street.",
+      "type": "video"
+    },
+    {
+      "file_path": "train/00000002.jpg",
+      "text": "A group of young men in suits and sunglasses are walking down a city street.",
+      "type": "image"
+    },
+    .....
+]
+```
+<h4 id="dit-train">b. Video DiT training </h4>
+ 
+If the data format is relative path during data preprocessing, please set ```scripts/{model_name}/train.sh``` as follow.
+```
+export DATASET_NAME="datasets/internal_datasets/"
+export DATASET_META_NAME="datasets/internal_datasets/json_of_internal_datasets.json"
+```
+
+If the data format is absolute path during data preprocessing, please set ```scripts/train.sh``` as follow.
+```
+export DATASET_NAME=""
+export DATASET_META_NAME="/mnt/data/json_of_internal_datasets.json"
+```
+
+Then, we run scripts/train.sh.
+```sh
+sh scripts/train.sh
+```
+
+For details on some parameter settings:
+Wan2.1-Fun can be found in [Readme Train](scripts/wan2.1_fun/README_TRAIN.md) and [Readme Lora](scripts/wan2.1_fun/README_TRAIN_LORA.md).
+Wan2.1 can be found in [Readme Train](scripts/wan2.1/README_TRAIN.md) and [Readme Lora](scripts/wan2.1/README_TRAIN_LORA.md).
+CogVideoX-Fun can be found in [Readme Train](scripts/cogvideox_fun/README_TRAIN.md) and [Readme Lora](scripts/cogvideox_fun/README_TRAIN_LORA.md).
+<!-- # VideoX-Fun
 
 😊 Welcome!
 
@@ -618,4 +682,4 @@ This project is licensed under the [Apache License (Version 2.0)](https://github
 
 The CogVideoX-2B model (including its corresponding Transformers module and VAE module) is released under the [Apache 2.0 License](LICENSE).
 
-The CogVideoX-5B model (Transformers module) is released under the [CogVideoX LICENSE](https://huggingface.co/THUDM/CogVideoX-5b/blob/main/LICENSE).
+The CogVideoX-5B model (Transformers module) is released under the [CogVideoX LICENSE](https://huggingface.co/THUDM/CogVideoX-5b/blob/main/LICENSE). -->
