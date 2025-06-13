@@ -23,7 +23,7 @@ You need to arrange the dataset in this format
 │   ├── fall.mp4
 │   └── walk.mp4
 ```
-The json_of_internal_datasets.json is a standard JSON file. The file_path in the json can to be set as relative path, as shown in below:
+The json_of_internal_datasets.json is a standard JSON file. You can generate this josn file by using ``python construct_dataset.py`` The file_path in the json can to be set as relative path, as shown in below:
 ```json
 [
     {
