@@ -13,14 +13,27 @@ mkdir models/Personalized_Model
 
 # Please use the hugginface link or modelscope link to download the model.
 # Wan
-# https://huggingface.co/alibaba-pai/Wan2.1-Fun-V1.1-14B-InP
+https://huggingface.co/alibaba-pai/Wan2.1-Fun-V1.1-14B-Control
 # https://modelscope.cn/models/PAI/Wan2.1-Fun-V1.1-14B-InP
+
+
+📦 models/
+├── 📂 Diffusion_Transformer/
+│   ├── 📂 CogVideoX-Fun-V1.1-2b-InP/
+│   ├── 📂 CogVideoX-Fun-V1.1-5b-InP/
+│   ├── 📂 Wan2.1-Fun-14B-InP
+│   └── 📂 Wan2.1-Fun-1.3B-InP/
+├── 📂 Personalized_Model/
+│   └── your trained trainformer model / your trained lora model (for UI load)
+
 
 # configure conda environment
 conda create -n wanxtraj python=3.10
 conda activate wanxtraj
 pip install -r requirements.txt
 ```
+
+
 ## Model Training
 <h4 id="data-preprocess">a. data preprocessing</h4>
 
