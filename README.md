@@ -4,9 +4,9 @@
 We'd better place the [weights](#model-zoo) along the specified path:
 ```
 # clone code
-https://github.com/epicmouse667/WanxTraj.git
+git clone https://github.com/epicmouse667/WanxTraj.git
 # enter VideoX-Fun's dir
-cd VWanxTraj
+cd WanxTraj
 # download weights
 mkdir models/Diffusion_Transformer
 mkdir models/Personalized_Model
