@@ -2,13 +2,9 @@ import os
 import json
 from pathlib import Path
 
-def construct_dataset(base_dir):
+def construct_dataset(base_dir, prompt_dir):
     # 初始化结果列表
     dataset = []
-    
-    # 读取prompt文件
-    with open(os.path.join(base_dir, 'prompt.txt'), 'r') as f:
-        prompts = f.readlines()
     
     # 获取视频文件列表
     video_dir = os.path.join(base_dir, 'videos')
@@ -17,33 +13,37 @@ def construct_dataset(base_dir):
     # 遍历视频文件
     for video_file in sorted(os.listdir(video_dir)):
         if video_file.endswith('.mp4'):
-            # 获取对应的tracking文件
-            tracking_file = video_file.replace('.mp4', '_tracking.mp4')
-            
-            # 确保tracking文件存在
-            if os.path.exists(os.path.join(tracking_dir, tracking_file)):
-                # 获取对应的prompt（假设prompt.txt中的顺序与视频文件顺序一致）
-                video_index = int(video_file.split('.')[0]) - 1
-                if video_index < len(prompts):
-                    text = prompts[video_index].strip()
-                    
-                    # 创建数据条目
-                    entry = {
-                        "file_path": f"videos/{video_file}",
-                        "control_file_path": f"tracking/{tracking_file}",
-                        "text": text,
-                        "type": "video"
-                    }
-                    dataset.append(entry)
+            # 获取vid（去除扩展名）
+            vid = os.path.splitext(video_file)[0]
+            # control_file_path
+            control_file = f"{vid}_tracking.mp4"
+            control_file_path = os.path.join(tracking_dir, control_file)
+            # prompt文件路径
+            prompt_file_path = os.path.join(prompt_dir, f"{vid}.txt")
+            print(control_file_path, prompt_file_path)
+            # 检查tracking和prompt文件是否存在
+            if os.path.exists(control_file_path) and os.path.exists(prompt_file_path):
+                # 读取prompt内容
+                with open(prompt_file_path, 'r', encoding='utf-8') as pf:
+                    text = pf.read().strip()
+                # 创建数据条目
+                entry = {
+                    "file_path": f"videos/{video_file}",
+                    "control_file_path": f"tracking/{vid}_tracking.mp4",
+                    "text": text,
+                    "type": "video"
+                }
+                dataset.append(entry)
     
     return dataset
 
 def main():
     # 设置基础目录
-    base_dir = "/project/pi_chuangg_umass_edu/zixin/datasets/DaS_validation/motion_transfer"
+    base_dir = "/nobackup/users/kentang/zixin/iclr2026/data/Motion-X++/tracking/idea400_light"
+    prompt_dir = "/nobackup/users/kentang/zixin/iclr2026/data/Motion-X++/text/idea400"  # 这里可以自定义
     
     # 构建数据集
-    dataset = construct_dataset(base_dir)
+    dataset = construct_dataset(base_dir, prompt_dir)
     
     # 将结果写入JSON文件
     output_file = os.path.join(base_dir, 'metadata.json')
